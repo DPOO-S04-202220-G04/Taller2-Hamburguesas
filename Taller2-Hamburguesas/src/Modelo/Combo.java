@@ -6,11 +6,13 @@ public class Combo implements Producto{
 	private double descuento;
 	private String nombreCombo;
 	private ArrayList<Producto> productos; //JUSTIFICAR POR QUÉ AGREGAMOS ESTO
+	private int precio;
 	
 	public Combo(String nombre, double descuento) {
 		nombreCombo = nombre;
 		this.descuento = descuento;
 		productos = new ArrayList<Producto>();
+		this.precio = 0;
 	}
 	
 	public void agregarItemACombo(Producto itemCombo) {
@@ -22,13 +24,27 @@ public class Combo implements Producto{
 		for (Producto producto : productos) {
 			precioBase += producto.getPrecio();
 		}
-		int precio = (int) Math.round(precioBase*descuento);
+		this.precio = (int) Math.round(precioBase - precioBase*descuento);
 		return precio; 
 	}
 	
-	public String generarTextoFactura() {}
+	public String generarTextoFactura() {
+		String factura = "+ " + nombreCombo + " $" + precio + ":\n";
+		for (Producto p : productos) {
+			factura += "	" + p.getNombre() + "\n";
+		}
+		return factura;
+	}
 	
 	public String getNombre() {
 		return nombreCombo;
+	}
+	
+	public String toString() {
+		String s = nombreCombo + " $" + precio + ":\n";
+		for (Producto p : productos) {
+			s += "   --> " + p.getNombre() + "\n";
+		}
+		return s;
 	}
 }

@@ -7,4 +7,7 @@ public interface Producto {
 	public String getNombre();
 	
 	public String generarTextoFactura();
+	
+	//justificar 
+	public String toString();
 }

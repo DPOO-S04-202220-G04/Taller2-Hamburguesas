@@ -1,18 +1,36 @@
 package Modelo;
+import java.util.*;
 
 public class ProductoAjustado implements Producto{
-	private int precio;
-	private String nombre;
-	private String factura;
+	private int precio; //justificar
+	private String factura;//justificar 
+	private ArrayList<Ingrediente> agregados;
+	private ArrayList<Ingrediente> eliminados;
+	private ProductoMenu base;
 	
 	public ProductoAjustado(ProductoMenu base) {
-		this.precio = base.getPrecio();
-		this.nombre = base.getNombre();
-		this.factura = base.generarTextoFactura();
+		this.base = base;
+		precio = base.getPrecio();
+		factura = base.generarTextoFactura();
+		agregados = new ArrayList<Ingrediente>();
+		eliminados = new ArrayList<Ingrediente>();
+	}
+	
+	//JUSTIFICAR
+	public void agregarIngrediente(Ingrediente agregado) {
+		precio += agregado.getCostoAdicional();
+		agregados.add(agregado);
+		factura += "	" + "+ " + agregado.getNombre() + " $" + agregado.getCostoAdicional() + "\n";
+	}
+	
+	//JUSTIFICAR
+	public void eliminarIngrediente(Ingrediente eliminar) {
+		eliminados.add(eliminar);
+		factura += "	" + "- " + eliminar.getNombre() + "\n";
 	}
 	
 	public String getNombre() {
-		return nombre;
+		return base.getNombre();
 	}
 	
 	public int getPrecio() {

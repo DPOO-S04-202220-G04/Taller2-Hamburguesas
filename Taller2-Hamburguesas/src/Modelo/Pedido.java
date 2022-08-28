@@ -1,18 +1,24 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.lang.Math;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Pedido {
-	private int numeroPedidos;
+	//private int numeroPedidos;
 	private int idPedido;
 	private String nombreCliente;
 	private String direccionCliente;
 	private ArrayList<Producto> productosPedido; //JUSTIFICAR POR QUÉ AGREGAMOS ESTO
+
 	
 	public Pedido(String nombreCliente, String direccionCliente, int idPedido) {
 		this.nombreCliente = nombreCliente;
 		this.direccionCliente = direccionCliente;
 		this.idPedido = idPedido;
+		productosPedido = new ArrayList<Producto>();
 		
 	}
 	
@@ -21,16 +27,50 @@ public class Pedido {
 	}
 	
 	public void agregarProducto(Producto nuevoItem) {
-		
+		productosPedido.add(nuevoItem);
 	}
 	
-	private int getPrecioNetoPedido() {}
+	private int getPrecioNetoPedido() {
+		int precio = 0;
+		for (Producto prod: productosPedido) {
+			precio += prod.getPrecio();
+		}
+		return precio;
+	}
 	
-	private int getPrecioTotalPedido() {}
+	private int getPrecioTotalPedido() {
+		int precioTotal = getPrecioNetoPedido() + getPrecioIVAPedido();
+		return precioTotal;
+	}
 	
-	private int getPrecioIVAPedido() {}
+	private int getPrecioIVAPedido() {
+		double preciodouble = getPrecioNetoPedido();
+		int precioIVA = (int)Math.round(preciodouble*0.19);
+		return precioIVA;
+	}
 	
-	private String generarTextoFactura() {}
+	private String generarTextoFactura() {
+		String id = "Factura electronica - " + idPedido + "\n";
+		String nombreRestaurante = "Restaurante Tienda de Hamburguesas\n";
+		String infoCliente =  "Nombre: " + nombreCliente + "	Dirección: " + direccionCliente + "\n";
+		String factura = "";
+		for (Producto producto : productosPedido) {
+			factura += producto.generarTextoFactura();
+		}
+		String precioNeto = "Precio Neto = " + getPrecioNetoPedido() + "\n";
+		String precioIVA = "Precio IVA (19%) = " + getPrecioIVAPedido() + "\n";
+		String precioTotal = "Precio Total = " + getPrecioTotalPedido() + "\n";
+		String facturaCompleta = id + nombreRestaurante + infoCliente + factura + precioNeto +
+				precioIVA + precioTotal;
+		return facturaCompleta;
+	}
 	
-	public void guardarFactura(File archivo) {}
+	public void guardarFactura(File archivo) throws IOException {
+		String[] factura = generarTextoFactura().split("\n");
+		FileWriter file = new FileWriter(archivo);
+		for (String s : factura) {
+			file.write(s);
+		}
+		file.close();
+	}
 }

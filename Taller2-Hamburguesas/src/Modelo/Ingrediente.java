@@ -16,4 +16,8 @@ public class Ingrediente {
 	public int getCostoAdicional() {
 		return costoAdicional;
 	}
+	
+	public String toString() {
+		return nombre + " $" + costoAdicional;
+	}
 }

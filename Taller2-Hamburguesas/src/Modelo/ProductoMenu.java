@@ -18,6 +18,11 @@ public class ProductoMenu implements Producto{
 	}
 	 
 	public String generarTextoFactura() {
-		return "hOLA";
+		String factura = "+ " + nombre + " $" + precioBase + "\n";
+		return factura;
+	}
+	
+	public String toString() {
+		return nombre + " $" + precioBase;
 	}
 } 

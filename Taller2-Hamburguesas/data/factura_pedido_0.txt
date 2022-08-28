@@ -1,0 +1,1 @@
+Factura electronica - 0Restaurante Tienda de HamburguesasNombre: María Catalina Ibáñez Piñeres	Dirección: Calle 64 #4-51+ combo corral queso $23850:	corral queso	papas medianas	gaseosa+ ensalada mexicana $20900	+ suero costeño $3000	+ queso fundido $4500	- tomate	- cebollaPrecio Neto = 52250Precio IVA (19%) = 9928Precio Total = 62178
