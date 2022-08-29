@@ -1,4 +1,4 @@
-package Modelo;
+package Modulo;
 
 import java.util.ArrayList;
 import java.lang.Math;
@@ -30,6 +30,14 @@ public class Pedido {
 		productosPedido.add(nuevoItem);
 	}
 	
+	public int getCaloriasTotal() {
+		int calorias = 0;
+		for (Producto prod: productosPedido) {
+			calorias += prod.getCalorias();
+		}
+		return calorias;
+	}
+	
 	private int getPrecioNetoPedido() {
 		int precio = 0;
 		for (Producto prod: productosPedido) {
@@ -58,11 +66,12 @@ public class Pedido {
 		for (Producto producto : productosPedido) {
 			factura += producto.generarTextoFactura();
 		}
+		String caloriasTotal = "Calorias Total = " + getCaloriasTotal() + " calorias\n";
 		String precioNeto = "Precio Neto = $" + getPrecioNetoPedido() + "\n";
 		String precioIVA = "Precio IVA (19%) = $" + getPrecioIVAPedido() + "\n";
 		String precioTotal = "Precio Total = $" + getPrecioTotalPedido() + "\n";
-		String facturaCompleta = id + nombreRestaurante + infoCliente + titulo + factura + precioNeto +
-				precioIVA + precioTotal;
+		String facturaCompleta = id + nombreRestaurante + infoCliente + titulo + factura 
+				+ caloriasTotal + precioNeto + precioIVA + precioTotal;
 		return facturaCompleta;
 	}
 	
