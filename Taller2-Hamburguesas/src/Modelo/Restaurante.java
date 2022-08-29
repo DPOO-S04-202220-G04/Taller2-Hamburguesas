@@ -20,6 +20,7 @@ public class Restaurante {
 		menuBase = new ArrayList<ProductoMenu>();
 		combos = new ArrayList<Combo>();
 		pedidos = new ArrayList<Pedido>();
+		pedidoEnCurso = null;
 		File ingredientesFile = new File("data/ingredientes.txt");
 		File combosFile = new File("data/combos.txt");
 		File menuFile = new File("data/menu.txt");
@@ -32,6 +33,7 @@ public class Restaurante {
 	
 	public void cerrarYGuardarPedido() {
 		pedidos.add(pedidoEnCurso);
+		pedidoEnCurso = null;
 	}
 	
 	public Pedido getPedidoEnCurso() {

@@ -37,9 +37,9 @@ public class Aplicacion {
 					ejecutarMostrarMenu();
 				else if (opcion_seleccionada == 2)
 					ejecutarIniciarNuevoPedido();
-				else if (opcion_seleccionada == 3)
+				else if (opcion_seleccionada == 3 && restaurante.getPedidoEnCurso() != null)
 					ejecutarAgregarElemento();
-				else if (opcion_seleccionada == 4)
+				else if (opcion_seleccionada == 4 && restaurante.getPedidoEnCurso() != null)
 					ejecutarCerrarPedidoGuardarFactura();
 				else if (opcion_seleccionada == 5)
 					ejecutarInfoDeUnPedido();
@@ -47,6 +47,10 @@ public class Aplicacion {
 				{
 					System.out.println("Saliendo de la aplicación ...");
 					continuar = false;
+				}
+				else if (restaurante.getPedidoEnCurso() == null)
+				{
+					System.out.println("Para poder ejecutar esta opción primero debe iniciar un pedido.");
 				}
 				else
 				{
@@ -97,13 +101,13 @@ public class Aplicacion {
 	// Mostrar ingredientes
 	public void mostrarIngredientes() {
 		ArrayList<Ingrediente> ingredientes = restaurante.getIngredientes();
-		System.out.println("Menú de Ingredientes: ");
+		System.out.println("\nMenú de Ingredientes: ");
 		int contador = 1;
 		for (Ingrediente in : ingredientes) {
 			System.out.println(contador + ". " + in.toString());
 			contador += 1;
 		}
-		System.out.println(contador + ". " + "Ingrese -1 si ya se finalizó la edición del producto");
+		System.out.println(contador + ". " + "Si finalizó la edición del producto, ingrese (-1)");
 	}
 	
 	// 3. AGREGAR UN ELEMENTO AL PEDIDO
@@ -111,29 +115,30 @@ public class Aplicacion {
 		boolean continuar = true;
 		while (continuar){
 			try{
+				System.out.println("\nPedido " + restaurante.getPedidoEnCurso().getIdPedido() + " en curso...");
 				int num = ejecutarMostrarMenu();
 				if (num == 1) {
-					int opcion_seleccionada = Integer.parseInt(input("Ingrese el número del elemento que desea agregar al pedido"));
+					int opcion_seleccionada = Integer.parseInt(input("\nIngrese el número del elemento que desea agregar al pedido"));
 					Combo unCombo = restaurante.getCombos().get(opcion_seleccionada-1);
 					restaurante.getPedidoEnCurso().agregarProducto(unCombo);
 				}
 				else if (num == 2) {
-					int opcion_seleccionada = Integer.parseInt(input("Ingrese el número del elemento que desea agregar al pedido"));
+					int opcion_seleccionada = Integer.parseInt(input("\nIngrese el número del elemento que desea agregar al pedido"));
 					ProductoMenu unProductoMenu = restaurante.getMenuBase().get(opcion_seleccionada-1);
-					int quiereIng = Integer.parseInt(input("¿Desea agregar/eliminar algún ingrediente? 1(Sí)/2(No) "));
+					int quiereIng = Integer.parseInt(input("\n¿Desea agregar o eliminar algún ingrediente? 1(Sí)/2(No) "));
 					if (quiereIng == 1) {
 						ProductoAjustado unProductoAjustado = new ProductoAjustado(unProductoMenu);
 						boolean continuar2 = true;
 						while (continuar2) {
 							
 							mostrarIngredientes();
-							int numIngrediente = Integer.parseInt(input("Ingrese el número del ingrediente que desea agregar/eliminar"));
+							int numIngrediente = Integer.parseInt(input("\nIngrese el número del ingrediente que desea agregar o eliminar"));
 							if (numIngrediente == -1) {
 								continuar2 = false;
 								restaurante.getPedidoEnCurso().agregarProducto(unProductoAjustado);
 							}
 							else {
-								int agregarOEliminar = Integer.parseInt(input("Desea agregarlo o eliminarlo? 1(agregar)/2(eliminar)"));
+								int agregarOEliminar = Integer.parseInt(input("\nDesea agregarlo o eliminarlo? 1(agregar)/2(eliminar)"));
 								Ingrediente unIngrediente = restaurante.getIngredientes().get(numIngrediente-1);
 								if (agregarOEliminar == 1) {
 									unProductoAjustado.agregarIngrediente(unIngrediente);
@@ -165,7 +170,7 @@ public class Aplicacion {
 		File archivo = new File("data/factura_pedido_" + ID + ".txt");
 		pedido.guardarFactura(archivo);
 		restaurante.cerrarYGuardarPedido();
-		System.out.println("Su pedido con ID: " + ID + " fue guardado con éxito!");
+		System.out.println("\nSu pedido con ID: " + ID + " fue guardado con éxito!");
 	}
 	
 	//5. Información de un pedido
@@ -174,8 +179,10 @@ public class Aplicacion {
 		File archivo = new File("data/factura_pedido_" + id + ".txt");
 		BufferedReader br = new BufferedReader(new FileReader(archivo));
 		String linea = br.readLine(); 
+		System.out.println("");
 		while (linea != null) {
-			System.out.println(br.readLine());
+			System.out.println(linea);
+			linea = br.readLine();
 		}
 		br.close();
 	}

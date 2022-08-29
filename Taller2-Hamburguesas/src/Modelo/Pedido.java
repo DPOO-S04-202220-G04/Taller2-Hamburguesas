@@ -52,7 +52,8 @@ public class Pedido {
 	private String generarTextoFactura() {
 		String id = "Factura electronica - " + idPedido + "\n";
 		String nombreRestaurante = "Restaurante Tienda de Hamburguesas\n";
-		String infoCliente =  "Nombre: " + nombreCliente + "	Dirección: " + direccionCliente + "\n";
+		String infoCliente =  "Nombre: " + nombreCliente + "\nDirección: " + direccionCliente + "\n";
+		String titulo = "PRODUCTOS\n";
 		String factura = "";
 		for (Producto producto : productosPedido) {
 			factura += producto.generarTextoFactura();
@@ -60,7 +61,7 @@ public class Pedido {
 		String precioNeto = "Precio Neto = " + getPrecioNetoPedido() + "\n";
 		String precioIVA = "Precio IVA (19%) = " + getPrecioIVAPedido() + "\n";
 		String precioTotal = "Precio Total = " + getPrecioTotalPedido() + "\n";
-		String facturaCompleta = id + nombreRestaurante + infoCliente + factura + precioNeto +
+		String facturaCompleta = id + nombreRestaurante + infoCliente + titulo + factura + precioNeto +
 				precioIVA + precioTotal;
 		return facturaCompleta;
 	}
@@ -69,7 +70,7 @@ public class Pedido {
 		String[] factura = generarTextoFactura().split("\n");
 		FileWriter file = new FileWriter(archivo);
 		for (String s : factura) {
-			file.write(s);
+			file.write(s + "\n");
 		}
 		file.close();
 	}
