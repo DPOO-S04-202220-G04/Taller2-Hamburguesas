@@ -1,5 +1,7 @@
 package Consola;
 import java.util.*;
+
+import Modulo.Pedido;
 import Modulo.*;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
@@ -181,11 +183,29 @@ public class Aplicacion {
 	// 4. Cerrar el pedido y guardar la factura
 	public void ejecutarCerrarPedidoGuardarFactura() throws IOException {
 		Pedido pedido = restaurante.getPedidoEnCurso();
+		boolean hayPedidoIgual =  buscarPedidoIgual(pedido);
+		if (hayPedidoIgual == true) {
+			System.out.println("SI ha habido un pedido igual");
+		}
+		else {
+			System.out.println("NO ha habido un pedido igual");
+		}
 		int ID = pedido.getIdPedido();
 		File archivo = new File("data/factura_pedido_" + ID + ".txt");
 		pedido.guardarFactura(archivo);
 		restaurante.cerrarYGuardarPedido();
 		System.out.println("\nSu pedido con ID: " + ID + " fue guardado con éxito!");
+	}
+	
+	public boolean buscarPedidoIgual(Pedido elPedido) {
+		 ArrayList<Pedido> pedidos = restaurante.getPedidos() ;
+		 for (int i = 0; i<pedidos.size(); i++){
+			 Pedido unPedido = pedidos.get(i);
+			 if (elPedido.equals(unPedido)) {
+				 return true;
+			 }
+		 }
+		 return false;
 	}
 	
 	//5. Información de un pedido

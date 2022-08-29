@@ -1,5 +1,8 @@
 package Modulo;
 import java.util.*;
+
+import Modulo.Combo;
+
 import java.lang.Math;
 
 public class Combo implements Producto{
@@ -57,5 +60,27 @@ public class Combo implements Producto{
 		}
 		return s;
 	}
+	
+	// Overriding equals() to compare two Combos objects
+    @Override
+    public boolean equals(Object o) {
+ 
+        // If the object is compared with itself then return true 
+        if (o == this) {
+            return true;
+        }
+ 
+        /* Check if o is an instance of Combo or not
+          "null instanceof [type]" also returns false */
+        if (!(o instanceof Combo)) {
+            return false;
+        }
+         
+        // typecast o to Complex so that we can compare data members
+        Combo unCombo = (Combo) o;
+         
+        // Compare the data members and return accordingly
+        return  this.nombreCombo.equals(unCombo.getNombre());
+    }
 }
 

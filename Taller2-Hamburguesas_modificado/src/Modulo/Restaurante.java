@@ -2,6 +2,8 @@ package Modulo;
 
 import java.util.*;
 
+import Modulo.Pedido;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -49,6 +51,11 @@ public class Restaurante {
 	
 	public ArrayList<Ingrediente> getIngredientes(){
 		return ingredientes;
+	}
+	
+	//Justificar
+	public ArrayList<Pedido> getPedidos(){
+		return pedidos;
 	}
 	
 	//Justificar por qué se agregó esto
