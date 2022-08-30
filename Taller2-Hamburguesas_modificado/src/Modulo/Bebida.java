@@ -24,7 +24,7 @@ public class Bebida implements Producto{
 	}
 	
 	public String generarTextoFactura() {
-		return "+ " + nombre + " $" + precio + "\n";
+		return "+ " + nombre + " $" + precio + "--> " + calorias + "calorias\n";
 	}
 	
 	public String toString() {

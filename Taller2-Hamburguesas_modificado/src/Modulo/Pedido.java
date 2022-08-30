@@ -14,14 +14,14 @@ public class Pedido {
 	private int idPedido;
 	private String nombreCliente;
 	private String direccionCliente;
-	private ArrayList<Producto> productosPedido; //JUSTIFICAR POR QUÉ AGREGAMOS ESTO
+	private ArrayList<Producto> itemsPedido; 
 
 	
 	public Pedido(String nombreCliente, String direccionCliente, int idPedido) {
 		this.nombreCliente = nombreCliente;
 		this.direccionCliente = direccionCliente;
 		this.idPedido = idPedido;
-		productosPedido = new ArrayList<Producto>();
+		itemsPedido = new ArrayList<Producto>();
 		
 	}
 	
@@ -30,16 +30,16 @@ public class Pedido {
 	}
 	
 	public void agregarProducto(Producto nuevoItem) {
-		productosPedido.add(nuevoItem);
+		itemsPedido.add(nuevoItem);
 	}
 	
 	public ArrayList<Producto> getProductosPedido(){
-		return productosPedido;
+		return itemsPedido;
 	}
 	
-	public int getCaloriasTotal() {
+	private int getCaloriasTotal() {
 		int calorias = 0;
-		for (Producto prod: productosPedido) {
+		for (Producto prod: itemsPedido) {
 			calorias += prod.getCalorias();
 		}
 		return calorias;
@@ -47,7 +47,7 @@ public class Pedido {
 	
 	private int getPrecioNetoPedido() {
 		int precio = 0;
-		for (Producto prod: productosPedido) {
+		for (Producto prod: itemsPedido) {
 			precio += prod.getPrecio();
 		}
 		return precio;
@@ -70,10 +70,10 @@ public class Pedido {
 		String infoCliente =  "Nombre: " + nombreCliente + "\nDirección: " + direccionCliente + "\n";
 		String titulo = "PRODUCTOS\n";
 		String factura = "";
-		for (Producto producto : productosPedido) {
+		for (Producto producto : itemsPedido) {
 			factura += producto.generarTextoFactura();
 		}
-		String caloriasTotal = "Calorias Total = " + getCaloriasTotal() + " calorias\n";
+		String caloriasTotal = "Total Calorias = " + getCaloriasTotal() + " calorias\n";
 		String precioNeto = "Precio Neto = $" + getPrecioNetoPedido() + "\n";
 		String precioIVA = "Precio IVA (19%) = $" + getPrecioIVAPedido() + "\n";
 		String precioTotal = "Precio Total = $" + getPrecioTotalPedido() + "\n";

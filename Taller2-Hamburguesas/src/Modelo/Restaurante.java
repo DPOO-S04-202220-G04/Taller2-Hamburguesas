@@ -111,7 +111,7 @@ public class Restaurante {
 			for(int i=2; i<partes.length; i++) {
 		         String nombreProducto = partes[i];
 		         // buscar producto en la lista de productos
-		         Producto prod = buscarProducto(menuBase, nombreProducto);
+		         ProductoMenu prod = buscarProducto(menuBase, nombreProducto);
 		         // si existe, agregar producto a combo
 		         if (prod != null) {
 		        	 elCombo.agregarItemACombo(prod);
@@ -124,10 +124,10 @@ public class Restaurante {
 		br.close();
 	}
 	
-	private Producto buscarProducto(ArrayList<ProductoMenu> menuBase, String nombreProducto){
-		Producto elProducto = null;
+	private ProductoMenu buscarProducto(ArrayList<ProductoMenu> menuBase, String nombreProducto){
+		ProductoMenu elProducto = null;
 		for (int i = 0; i<menuBase.size() && elProducto == null; i++){
-			Producto unProducto = menuBase.get(i);
+			ProductoMenu unProducto = menuBase.get(i);
 			if (unProducto.getNombre().equals(nombreProducto)){
 				elProducto = unProducto;
 			}

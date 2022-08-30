@@ -1,7 +1,6 @@
 package Modulo;
 import java.util.*;
 
-import Modulo.Ingrediente;
 import Modulo.ProductoAjustado;
 
 public class ProductoAjustado implements Producto{
@@ -26,14 +25,14 @@ public class ProductoAjustado implements Producto{
 		precio += agregado.getCostoAdicional();
 		agregados.add(agregado);
 		calorias += agregado.getCalorias();
-		factura += "	" + "+ " + agregado.getNombre() + " $" + agregado.getCostoAdicional() + "\n";
+		factura += "	" + "+ " + agregado.getNombre() +" ("+ agregado.getCalorias() + "cal.) $" + agregado.getCostoAdicional() + "\n";
 	}
 	
 	//JUSTIFICAR
 	public void eliminarIngrediente(Ingrediente eliminar) {
 		eliminados.add(eliminar);
 		calorias -= eliminar.getCalorias();
-		factura += "	" + "- " + eliminar.getNombre() + "\n";
+		factura += "	" + "- " + eliminar.getNombre() + " (" + eliminar.getCalorias() + "cal.) $" + "\n";
 	}
 	
 	public String getNombre() {

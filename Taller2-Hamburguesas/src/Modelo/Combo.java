@@ -5,23 +5,23 @@ import java.lang.Math;
 public class Combo implements Producto{
 	private double descuento;
 	private String nombreCombo;
-	private ArrayList<Producto> productos; //JUSTIFICAR POR QUÉ AGREGAMOS ESTO
+	private ArrayList<ProductoMenu> itemsCombo; //JUSTIFICAR POR QUÉ AGREGAMOS ESTO
 	private int precio;
 	
 	public Combo(String nombre, double descuento) {
 		nombreCombo = nombre;
 		this.descuento = descuento;
-		productos = new ArrayList<Producto>();
+		itemsCombo = new ArrayList<ProductoMenu>();
 		this.precio = 0;
 	}
 	
-	public void agregarItemACombo(Producto itemCombo) {
-		productos.add(itemCombo);
+	public void agregarItemACombo(ProductoMenu itemCombo) {
+		itemsCombo.add(itemCombo);
 	}
 	
 	public int getPrecio() {
 		double precioBase = 0;
-		for (Producto producto : productos) {
+		for (Producto producto : itemsCombo) {
 			precioBase += producto.getPrecio();
 		}
 		this.precio = (int) Math.round(precioBase - precioBase*descuento);
@@ -30,7 +30,7 @@ public class Combo implements Producto{
 	
 	public String generarTextoFactura() {
 		String factura = "+ " + nombreCombo + " $" + precio + ":\n";
-		for (Producto p : productos) {
+		for (Producto p : itemsCombo) {
 			factura += "	" + p.getNombre() + "\n";
 		}
 		return factura;
@@ -42,7 +42,7 @@ public class Combo implements Producto{
 	
 	public String toString() {
 		String s = nombreCombo + " $" + precio + ":\n";
-		for (Producto p : productos) {
+		for (Producto p : itemsCombo) {
 			s += "   --> " + p.getNombre() + "\n";
 		}
 		return s;

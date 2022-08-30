@@ -66,7 +66,7 @@ public class Aplicacion {
 	
 	// Justificar este método?
 	// 1. MOSTRAR MENÚ
-	public int ejecutarMostrarMenu() {
+	private int ejecutarMostrarMenu() {
 		System.out.println("\nOpciones de menú:\n1. Menú de Combos\n2. Menú de Productos\n3. Regresar al menú principal");
 		int opcion_seleccionada = Integer.parseInt(input("\n¿Qué menú desea ver? "));
 		
@@ -92,14 +92,14 @@ public class Aplicacion {
 	}
 	
 	// 2. INICIAR PEDIDO
-	public void ejecutarIniciarNuevoPedido() {
+	private void ejecutarIniciarNuevoPedido() {
 		String nombreCliente = input("Ingrese su nombre");
 		String direccionCliente = input("Ingrese su dirección");
 		restaurante.iniciarPedido(nombreCliente, direccionCliente);
 	}
 	
 	// Mostrar ingredientes
-	public void mostrarIngredientes() {
+	private void mostrarIngredientes() {
 		ArrayList<Ingrediente> ingredientes = restaurante.getIngredientes();
 		System.out.println("\nMenú de Ingredientes: ");
 		int contador = 1;
@@ -111,7 +111,7 @@ public class Aplicacion {
 	}
 	
 	// 3. AGREGAR UN ELEMENTO AL PEDIDO
-	public void ejecutarAgregarElemento() {
+	private void ejecutarAgregarElemento() {
 		boolean continuar = true;
 		while (continuar){
 			try{
@@ -164,7 +164,7 @@ public class Aplicacion {
 	}
 	
 	// 4. Cerrar el pedido y guardar la factura
-	public void ejecutarCerrarPedidoGuardarFactura() throws IOException {
+	private void ejecutarCerrarPedidoGuardarFactura() throws IOException {
 		Pedido pedido = restaurante.getPedidoEnCurso();
 		int ID = pedido.getIdPedido();
 		File archivo = new File("data/factura_pedido_" + ID + ".txt");
@@ -174,7 +174,7 @@ public class Aplicacion {
 	}
 	
 	//5. Información de un pedido
-	public void ejecutarInfoDeUnPedido() throws IOException {
+	private void ejecutarInfoDeUnPedido() throws IOException {
 		int id = Integer.parseInt(input("Ingrese el ID del pedido que desea consultar"));
 		File archivo = new File("data/factura_pedido_" + id + ".txt");
 		BufferedReader br = new BufferedReader(new FileReader(archivo));

@@ -28,7 +28,7 @@ public class ProductoMenu implements Producto{
 	}
 	 
 	public String generarTextoFactura() {
-		String factura = "+ " + nombre + " $" + precioBase + "\n";
+		String factura = "+ " + nombre + " ("+calorias+ "cal.) $" + precioBase + "\n";
 		return factura;
 	}
 	

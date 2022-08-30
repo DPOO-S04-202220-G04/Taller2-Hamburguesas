@@ -2,7 +2,6 @@ package Modulo;
 
 import java.util.*;
 
-import Modulo.Pedido;
 
 import java.io.BufferedReader;
 import java.io.File;
