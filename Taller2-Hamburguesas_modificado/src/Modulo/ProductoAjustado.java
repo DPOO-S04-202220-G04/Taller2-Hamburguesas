@@ -32,7 +32,7 @@ public class ProductoAjustado implements Producto{
 	public void eliminarIngrediente(Ingrediente eliminar) {
 		eliminados.add(eliminar);
 		calorias -= eliminar.getCalorias();
-		factura += "	" + "- " + eliminar.getNombre() + " (" + eliminar.getCalorias() + "cal.) $" + "\n";
+		factura += "	" + "- " + eliminar.getNombre() + " (" + eliminar.getCalorias() + "cal.)" + "\n";
 	}
 	
 	public String getNombre() {
