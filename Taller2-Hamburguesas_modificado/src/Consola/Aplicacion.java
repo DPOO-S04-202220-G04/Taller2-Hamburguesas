@@ -183,12 +183,14 @@ public class Aplicacion {
 	// 4. Cerrar el pedido y guardar la factura
 	private void ejecutarCerrarPedidoGuardarFactura() throws IOException {
 		Pedido pedido = restaurante.getPedidoEnCurso();
-		boolean hayPedidoIgual =  buscarPedidoIgual(pedido);
-		if (hayPedidoIgual == true) {
-			System.out.println("SI ha habido un pedido igual");
+		int hayPedidoIgual =  buscarPedidoIgual(pedido);
+		if (hayPedidoIgual == -1) {
+			System.out.println("NO ha habido un pedido igual");
 		}
 		else {
-			System.out.println("NO ha habido un pedido igual");
+			System.out.println("SI ha habido un pedido igual antes");
+			System.out.println("Su pedido con ID " + pedido.getIdPedido()+ "es igual al pedido con ID " + hayPedidoIgual);
+			
 		}
 		int ID = pedido.getIdPedido();
 		File archivo = new File("data/factura_pedido_" + ID + ".txt");
@@ -197,15 +199,15 @@ public class Aplicacion {
 		System.out.println("\nSu pedido con ID: " + ID + " fue guardado con éxito!");
 	}
 	
-	private boolean buscarPedidoIgual(Pedido elPedido) {
+	private int buscarPedidoIgual(Pedido elPedido) {
 		 ArrayList<Pedido> pedidos = restaurante.getPedidos() ;
 		 for (int i = 0; i<pedidos.size(); i++){
 			 Pedido unPedido = pedidos.get(i);
 			 if (elPedido.equals(unPedido)) {
-				 return true;
+				 return unPedido.getIdPedido();
 			 }
 		 }
-		 return false;
+		 return -1;
 	}
 	
 	//5. Información de un pedido
