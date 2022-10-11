@@ -188,8 +188,8 @@ public class Aplicacion {
 			System.out.println("NO ha habido un pedido igual");
 		}
 		else {
-			System.out.println("SI ha habido un pedido igual antes");
-			System.out.println("Su pedido con ID " + pedido.getIdPedido()+ "es igual al pedido con ID " + hayPedidoIgual);
+			System.out.println("SI ha habido un pedido igual antes!");
+			System.out.println("Su pedido con ID " + pedido.getIdPedido()+ " es igual al pedido con ID " + hayPedidoIgual);
 			
 		}
 		int ID = pedido.getIdPedido();
